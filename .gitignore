@@ -9,6 +9,9 @@
 # output directory
 /out
 
+# solutions directory
+/Calendar/Solutions
+
 # msbuild output directories
 /bin
 /obj
