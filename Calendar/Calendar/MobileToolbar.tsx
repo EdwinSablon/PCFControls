@@ -1,7 +1,7 @@
 import * as PropTypes from 'prop-types'
 import * as React from 'react';
 import clsx from 'clsx'
-import * as Color from 'color'
+import Color from 'color'
 import { ToolbarProps, NavigateAction, View, Messages } from 'react-big-calendar'
 import { Dropdown, DropdownMenuItemType, IDropdownStyles, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
 import { CommandBarButton, IButtonProps } from 'office-ui-fabric-react/lib/Button';

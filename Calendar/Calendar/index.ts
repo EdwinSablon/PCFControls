@@ -78,7 +78,7 @@ export class Calendar implements ComponentFramework.StandardControl<IInputs, IOu
 		}
 		else{
 			///@ts-ignore
-			this._container.style.height = this._context.mode?.rowSpan ? `${(this._context.mode.rowSpan * 1.5).toString()}em` : "100%"
+			this._container.style.height = "100%"
 		}		
 		this._container.style.zIndex = "0";
 		

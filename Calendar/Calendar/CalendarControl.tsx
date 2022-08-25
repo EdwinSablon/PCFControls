@@ -10,11 +10,12 @@ import {IInputs} from "./generated/ManifestTypes";
 import DataSetInterfaces = ComponentFramework.PropertyHelper.DataSetApi;
 import { Calendar, momentLocalizer, Event, View, ViewsProps, Culture } from 'react-big-calendar'
 import GetMessages from './Translations'
-import * as moment from 'moment'
+import moment from 'moment'
 import * as lcid from 'lcid';
-import * as Color from 'color'
+import Color from 'color'
 import {MobileToolbar, ToolbarColor} from './MobileToolbar'
 import { inherits } from 'util';
+import Year from './CustomViewComponent/Year';
 var CustomWorkWeek = require('./MyWorkWeek');
 var isHexColor = require('is-hexcolor');
 
@@ -343,6 +344,7 @@ return(!calendarData?.resources ? <Calendar
     className={`rbc-view-${calendarView}`}
     eventPropGetter={eventPropsGetter}
     dayPropGetter={dayPropsGetter}     
+    style={{ height: 250 }}
     components={{
         agenda: {
           event: agendaEvent,
@@ -372,6 +374,7 @@ return(!calendarData?.resources ? <Calendar
     className={`rbc-view-${calendarView}`}
     eventPropGetter={eventPropsGetter}
     dayPropGetter={dayPropsGetter}
+    style={{ height: 500 }}
     components={{
         agenda: {
           event: agendaEvent,

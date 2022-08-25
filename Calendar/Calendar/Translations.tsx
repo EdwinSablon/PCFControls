@@ -111,7 +111,7 @@ export default function GetMessages(lang: string): Messages{
                 day: 'Dag',
                 month: 'Maand',
                 previous: 'Terug',
-                next: 'Naast',
+                next: 'Volgende',
                 yesterday: 'Gisteren',
                 tomorrow: 'Morgen',
                 today: 'Vandaag',
