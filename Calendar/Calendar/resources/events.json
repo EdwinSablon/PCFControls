@@ -1,0 +1,15 @@
+[
+    {
+      "id": 0,
+      "title": "All Day Event very long title",
+      "allDay": true,
+      "start": "2022-09-06T22:00:00.000Z",
+      "end": "2022-09-09T22:00:00.000Z"
+    },
+    {
+      "id": 1,
+      "title": "Test Event 2",
+      "start": "2015-04-06T22:00:00.000Z",
+      "end": "2015-04-09T22:00:00.000Z"
+    }
+]

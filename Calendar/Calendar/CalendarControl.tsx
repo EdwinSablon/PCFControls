@@ -10,14 +10,33 @@ import {IInputs} from "./generated/ManifestTypes";
 import DataSetInterfaces = ComponentFramework.PropertyHelper.DataSetApi;
 import { Calendar, momentLocalizer, Event, View, ViewsProps, Culture } from 'react-big-calendar'
 import GetMessages from './Translations'
-import moment from 'moment'
+import moment, { now } from 'moment';
 import * as lcid from 'lcid';
-import Color from 'color'
+import Color from 'color';
 import {MobileToolbar, ToolbarColor} from './MobileToolbar'
+import WeekTest from './CustomViewComponent/WeekTest'
 import { inherits } from 'util';
+import CustomWeekView from './CustomViewComponent/CustomWeekView';
 import Year from './CustomViewComponent/Year';
+// var Year = require('./CustomViewComponent/Year')
+// var CustomView = require('./CustomViewComponent/CustomView')
+// var CustomWeekView = require('./CustomViewComponent/CustomWeekView')
 var CustomWorkWeek = require('./MyWorkWeek');
 var isHexColor = require('is-hexcolor');
+const events = [
+    {
+        id: "1",
+        title: 'Event 1',
+        start: new Date(),
+        end: new Date("2022-09-14")
+    },
+    {
+        id: "2",
+        title: 'Event 2',
+        start: new Date(),
+        end: new Date('2022-09-17')
+    }
+]
 
 export interface IProps {
     pcfContext: ComponentFramework.Context<IInputs>,
@@ -49,6 +68,7 @@ ToolbarColor.borderColor = calendarBorderColor;
 
 //set our moment to the current calendar culture for use of it outside the calendar.
 const localizer = momentLocalizer(moment);
+localizer.formats.yearHeaderFormat = 'YYYY'
 //customize the momentLocalizer to utilize our week start day property.
 localizer.startOfWeek = (culture: Culture) => {
       if (weekStartDay && weekStartDay > 0) return weekStartDay - 1;
@@ -209,7 +229,18 @@ const generateThemeCSS = () : string =>{
     
     .rbc-view-day .rbc-time-view .rbc-allday-cell {
         width: 140px;
-    }    
+    }
+    
+    .rbc-label {
+        display: none;
+        }
+        .rbc-allday-cell {
+        max-height: unset;
+        }
+        .rbc-time-content {
+        display: none;
+        }
+        
     `;
 }
 
@@ -333,6 +364,11 @@ return(!calendarData?.resources ? <Calendar
     messages={calendarMessages}
     defaultView={calendarView}
     view={calendarView}
+/*     views = {{
+        month: true,
+        week: true,
+        work_week: Year
+    }} */
     views={calendarViews}
     scrollToTime={calendarScrollTo} 
     events={calendarData.events}
@@ -344,7 +380,6 @@ return(!calendarData?.resources ? <Calendar
     className={`rbc-view-${calendarView}`}
     eventPropGetter={eventPropsGetter}
     dayPropGetter={dayPropsGetter}     
-    style={{ height: 250 }}
     components={{
         agenda: {
           event: agendaEvent,
@@ -361,7 +396,12 @@ return(!calendarData?.resources ? <Calendar
     messages={calendarMessages}
     defaultView={calendarView}
     view={calendarView}
-    views={calendarViews}
+/*     views = {{
+        month: true,
+        week: true,
+        work_week: Year
+    }} */
+    views= {calendarViews}
     scrollToTime={calendarScrollTo} 
     events={calendarData.events}
     onSelectEvent={ _handleEventSelected }
@@ -386,7 +426,7 @@ return(!calendarData?.resources ? <Calendar
     />);
 }
 
-//gets all the fields names and other keys will will need while processing the data
+//gets all the fields names and other keys we will need while processing the data
 async function getKeys(pcfContext: ComponentFramework.Context<IInputs>) : Promise<any> {
     let params = pcfContext.parameters;
     let dataSet = pcfContext.parameters.calendarDataSet;
@@ -591,9 +631,11 @@ function getCalendarViews(pcfContext: ComponentFramework.Context<IInputs>) : Vie
         validViews.forEach((view: string) => {
             if (view === 'work_week'){
                 selectedViews.work_week = CustomWorkWeek.default;                
-                selectedViews.work_week.includedDays = getWorkWeekExcludedDays(pcfContext)                
+                selectedViews.work_week.includedDays = getWorkWeekExcludedDays(pcfContext);  
             }
-            else{
+            else if (view === 'day'){
+                selectedViews.day = Year;
+            } else {
                 selectedViews[view] = true;
             }
         });

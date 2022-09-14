@@ -105,7 +105,7 @@ export default function GetMessages(lang: string): Messages{
                 date: 'Datum',
                 time: 'Tijdstip',
                 event: 'Evenement',
-                allDay: 'De hele dag',
+                allDay: 'Hele dag',
                 week: 'Week',
                 work_week: 'Werk Week',
                 day: 'Dag',

@@ -508,25 +508,30 @@ button.rbc-input::-moz-focus-inner {
 .rbc-time-view {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  /* flex: 1; */
   width: 100%;
+  height: 100%;
   border: 1px solid;/* #DDD; */;
-  min-height: 0; }
+  min-height: 0;
+  max-height: unset; }
   .rbc-time-view .rbc-time-gutter {
     white-space: nowrap; }
   .rbc-time-view .rbc-allday-cell {
     box-sizing: content-box;
     width: 100%;
     height: 100%;
-    position: relative; }
+    position: relative;
+    max-height: unset; }
   .rbc-time-view .rbc-allday-cell + .rbc-allday-cell {
     border-left: 1px solid;/* #DDD; */ }
   .rbc-time-view .rbc-allday-events {
     position: relative;
-    z-index: 4; }
+    z-index: auto;
+    height: 100%; }
   .rbc-time-view .rbc-row {
     box-sizing: border-box;
-    min-height: 20px; }
+    min-height: 20px;
+    height: 100%; }
 
 .rbc-time-header {
   display: flex;
@@ -565,11 +570,13 @@ button.rbc-input::-moz-focus-inner {
   width: 100%;
   border-top: 2px solid;/* #DDD; */
   overflow-y: auto;
-  position: relative; }
+  position: relative;
+  height: 100%; }
   .rbc-time-content > .rbc-time-gutter {
     flex: none; 
     /* To fix issue in Canvas app we will set the width manually */
-    width: 70px !important;}
+    width: 70px !important;
+    height: 100%; }
   .rbc-time-content > * + * > * {
     border-left: 1px solid;/* #DDD; */ }
   .rbc-rtl .rbc-time-content > * + * > * {
@@ -577,6 +584,7 @@ button.rbc-input::-moz-focus-inner {
     border-right: 1px solid;/* #DDD; */ }
   .rbc-time-content > .rbc-day-slot {
     width: 100%;
+    height: 100;
     user-select: none;
     -webkit-user-select: none; }
 
@@ -588,3 +596,72 @@ button.rbc-input::-moz-focus-inner {
   height: 1px;
   background-color: #74ad31;
   pointer-events: none; }
+
+
+/* CSS for Year view */
+  .year {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow: scroll;
+  }
+
+  .month {
+    margin: 5px 5px 15px 5px;
+  }
+
+  .month-name {
+    color: #ccbe88;
+    font-weight: bold;
+  }
+
+  .day {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+  }
+
+  
+.date {
+  width: 30px;
+  height: 30px;
+  background: white;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+}
+
+.date.in-month:hover {
+  cursor: pointer;
+  background: #ccbe88;
+}
+
+.today {
+  background: #ccbe88;
+}
+
+.date.prev-month,
+.date.next-month {
+  color: grey;
+}
+
+/* Hiding TimeGrid */
+.rbc-label {
+  display: none;
+  }
+
+/*   .rbc-allday-cell {
+    display: flex;
+    height: 100%;
+    max-height: unset;
+  flex: 1 0 0%;
+  align-items: flex-start;
+  width: 100%;
+  overflow-y: auto;
+  position: relative;
+    }
+    .rbc-time-content {
+    display: none;
+    } */

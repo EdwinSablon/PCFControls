@@ -1,10 +1,11 @@
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import React from 'react'
 import moment from 'moment'
-import { View } from 'react-big-calendar'
-
-import dates from 'react-big-calendar/lib/utils/dates'
-import { navigate } from 'react-big-calendar/lib/utils/constants'
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+var dates = _interopRequireWildcard(require("../../node_modules/react-big-calendar/lib/utils/dates"));
+//import dates from 'react-big-calendar/lib/utils/dates'
+// var dates = require('react-big-calendar/lib/utils/dates')
+var _constants = require("../../node_modules/react-big-calendar/lib/utils/constants.js");
 
 function createCalendar(currentDate) {
   if (!currentDate) {
@@ -136,23 +137,26 @@ class Year extends React.Component {
 //   date: PropTypes.instanceOf(Date).isRequired,
 // }
 
-Year.range = date => {
+Year.range = function (date) {
   return [dates.startOf(date, 'year')]
 }
 
-Year.navigate = (date, action) => {
+Year.navigate = function (date, action) {
   switch (action) {
-    case navigate.PREVIOUS:
+    case _constants.navigate.PREVIOUS:
       return dates.add(date, -1, 'year')
 
-    case navigate.NEXT:
+    case _constants.navigate.NEXT:
       return dates.add(date, 1, 'year')
 
     default:
       return date
   }
-}
+};
 
-Year.title = (date, { localizer }) => localizer.format(date, 'yearHeaderFormat')
+Year.title = function (date, _ref2) { 
+  var localizer = _ref2.localizer;
+  return localizer.format(date, 'yearHeaderFormat')
+}
 
 export default Year
